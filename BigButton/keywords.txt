@@ -1,0 +1,3 @@
+BigButton	KEYWORD1
+dropClaw	KEYWORD2
+buttonPressed	KEYWORD2
