@@ -1,7 +1,10 @@
-#include "Adafruit_NeoPixel.h"
+#ifndef LED_STRIPS_H
+#define LED_STRIPS_H
+
+
+#include "Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
 #include <Arduino.h>
-#include <cstdlib>
-#include <cstdint>
+
 
 
 class Lights{
@@ -33,3 +36,4 @@ class Lights{
 };
 
 
+#endif // !LED_STRIPS_H

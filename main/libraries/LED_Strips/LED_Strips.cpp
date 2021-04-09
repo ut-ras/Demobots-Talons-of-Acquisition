@@ -1,13 +1,11 @@
-#include "Adafruit_NeoPixel.h"
+#include "Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
 #include <Arduino.h>
-#include <cstdlib>
-#include <cstdint>
-#include "LED_Strips.hpp"
+#include "LED_Strips.h"
 
 
 
 
-Lights::chase(uint32_t color, int wait, int times, bool forward){
+ void Lights::chase(uint32_t color, int wait, int times, bool forward){
   if (forward == true) {
     for (int a = 0; a < times; a++) {
       for (int b = 0; b < 3; b++) {
@@ -36,7 +34,7 @@ Lights::chase(uint32_t color, int wait, int times, bool forward){
   }
 }
 
-Lights::initializeStrip(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness){
+void Lights::initializeStrip(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness){
     this->strip = strip;
     this->num_pixels = num_pixels;
     this->pin = pin;
@@ -45,7 +43,7 @@ Lights::initializeStrip(Adafruit_NeoPixel strip, int num_pixels, int pin, int br
     this->strip.show();
 }
 
-Lights::solidRainbowChase(int wait){
+void Lights::solidRainbowChase(int wait){
 
   for (long firstPixelHue = 0; firstPixelHue < 5 * 65536; firstPixelHue += 256) {
 
@@ -59,7 +57,7 @@ Lights::solidRainbowChase(int wait){
   }
 }
 
-Lights::rainbowCycle(uint8_t wait){
+void Lights::rainbowCycle(uint8_t wait){
   uint16_t i, j;
 
   for (j = 0; j < 256; j++) {
@@ -72,7 +70,7 @@ Lights::rainbowCycle(uint8_t wait){
 
 }
 
-Lights::colorWipe3(uint32_t color, int wait){
+void Lights::colorWipe3(uint32_t color, int wait){
   
   for(int i=0; i<this->num_pixels; i++){
     this->strip.fill(color, i, 5);
@@ -85,7 +83,7 @@ Lights::colorWipe3(uint32_t color, int wait){
 }
 
 
-Lights::colorWipe(uint32_t color, int wait, bool forward){
+void Lights::colorWipe(uint32_t color, int wait, bool forward){
     if (forward == true) {
 
     for (int i = 0; i < this->num_pixels; i++) {
@@ -106,7 +104,7 @@ Lights::colorWipe(uint32_t color, int wait, bool forward){
 }
 
 
-Lights::colorWipe2((uint32_t color, int wait, bool forward){
+void Lights::colorWipe2((uint32_t color, int wait, bool forward){
     if (forward == true) {
 
     for (int i = 0; i < this->num_pixels; i++) { 
@@ -128,4 +126,3 @@ Lights::colorWipe2((uint32_t color, int wait, bool forward){
 
   this->strip.clear();
 }
-
