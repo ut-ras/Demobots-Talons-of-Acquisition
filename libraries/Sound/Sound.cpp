@@ -5,12 +5,16 @@
 /*  Sound.cpp - Library created for control of
     Music for Claws of Aquisition.
 */
-
+#define soundPin 0
 Sound::Sound()
 {
-	//any inialization
+	pinMode(soundPin, OUTPUT);
 }
 
-void Sound::playSound(int data){			////change data to the name of the data that is sent to play sound
-	
+void Sound::playSound(){		
+	digitalWrite(soundPin, HIGH);
+}
+
+void Sound::stopSound(){		
+	digitalWrite(soundPin, LOW);
 }

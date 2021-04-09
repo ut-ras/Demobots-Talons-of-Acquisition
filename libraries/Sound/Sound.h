@@ -14,7 +14,8 @@ class Sound
 {
   public:
     Sound();
-	void playSound(int data); //change data to the name of the data that is sent to play sound
+	void playSound();
+	void stopSound();
 };
 
 #endif
