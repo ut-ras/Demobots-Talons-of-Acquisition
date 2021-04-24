@@ -1,0 +1,4 @@
+I created a "main" folder because Arduino IDE requires main.ino to be inside a folder called the same as the file.
+Additionally, I ended up placing the "libraries" folder inside the "main" folder so that it is easier to include the liabraries
+and to compile. Arduino IDE was giving me a hard time compiling modules outside of main folder, so I just decided to
+include the libraries inside it. 
