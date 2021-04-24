@@ -1,3 +1,12 @@
+/**
+ * Author: Dario Jimenez
+ * Last Modified: 04/12/2021
+ * Project: Talons of Acquisition
+ * File: LED_Strips.h
+ * Description: header file for LED strips for the Talons of Acquisition machine
+ * Organization: UT IEEE RAS Demobots
+ */
+
 #ifndef LED_STRIPS_H
 #define LED_STRIPS_H
 
@@ -11,10 +20,14 @@ class Lights{
     Adafruit_NeoPixel strip;
     int num_pixels;
     int pin;
+    int brightness;
 
     public:
+
+    Lights(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness);
+
     //initializes the LED strip; call under setup
-    void initializeStrip(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness);
+    //void initializeStrip(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness);
 
     void colorWipe(uint32_t color, int wait, bool forward);
 

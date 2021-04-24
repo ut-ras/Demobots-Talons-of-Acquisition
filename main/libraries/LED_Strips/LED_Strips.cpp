@@ -3,7 +3,16 @@
 #include "LED_Strips.h"
 
 
+Lights::Lights(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness){
+  this->strip = strip;
+  this->num_pixels = num_pixels;
+  this->pin = pin;
+  this->brightness = brightness;
 
+  this->strip.begin();
+  this->strip.getBrightness(brightness);
+  this->strip.show();
+}
 
  void Lights::chase(uint32_t color, int wait, int times, bool forward){
   if (forward == true) {
@@ -33,7 +42,7 @@
     }
   }
 }
-
+/*
 void Lights::initializeStrip(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness){
     this->strip = strip;
     this->num_pixels = num_pixels;
@@ -41,7 +50,7 @@ void Lights::initializeStrip(Adafruit_NeoPixel strip, int num_pixels, int pin, i
     this->strip.begin();
     this->strip.getBrightness(brightness);
     this->strip.show();
-}
+}*/
 
 void Lights::solidRainbowChase(int wait){
 

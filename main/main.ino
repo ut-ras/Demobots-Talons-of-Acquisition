@@ -8,6 +8,7 @@
 StepperControl myStepper;
 BigButton button;
 Sound music;
+Lights test(test, 10, 7, 50);
 
 void setup() {
   // put your setup code here, to run once:
