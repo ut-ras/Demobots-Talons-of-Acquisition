@@ -13,7 +13,26 @@
 
 #include "Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
 #include <Arduino.h>
+#include <stdint.h>
 
+#define NUM_COLORS 5
+
+typedef struct Color{
+    uint32_t red,
+    uint32_t green,
+    uint32_t blue,
+}Color_t;
+
+static Color_t colors[NUM_COLORS] = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}, {0, 0, 0}};
+
+
+typedef enum colors{
+    RED,
+    GREEN,
+    BLUE,
+    WHITE,
+    OFF
+}color_t;
 
 
 class Lights{
@@ -24,7 +43,27 @@ class Lights{
 
     public:
 
-    Lights(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness);
+    /* Initialize a LED Strip */
+    Lights(int num_pixels, int pin, int brightness);
+
+    /** 
+      * Turn on a specified number of initialized LEDs
+      * 
+      * Inputs: 1) num_leds: the number of initialized pixels wished to be turned on
+      *         2) color: the desired color of the LEDs (available colors can be found in Color_t struct)
+      * 
+      * Output: no output
+      **/
+    turnOn(uint8_t num_leds, Color_t color);
+
+
+    turnOnAll(Color_t color);
+
+    turnOff();
+
+   
+   /*
+    //Lights(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness);
 
     //initializes the LED strip; call under setup
     //void initializeStrip(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness);
@@ -45,7 +84,7 @@ class Lights{
     void chase(uint32_t color, int wait, int times, bool forward);
 
     //LEDs change color along the strip
-    void solidRainbowChase(int wait);
+    void solidRainbowChase(int wait);*/
 };
 
 

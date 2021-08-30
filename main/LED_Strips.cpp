@@ -3,13 +3,12 @@
 #include "libraries/LED_Strips/LED_Strips.h"
 
 
+static Color_t colors[NUM_COLORS] = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}, {0, 0, 0}};
 
-void hello(int x){
-  x = 90;
-}
 
-/*
+
 Lights::Lights(int num_pixels, int pin, int brightness){
+  
   Adafruit_NeoPixel newStrip = Adafruit_NeoPixel(num_pixels, pin,  NEO_GRB + NEO_KHZ800);
   
   this->strip = newStrip;
@@ -20,7 +19,33 @@ Lights::Lights(int num_pixels, int pin, int brightness){
   this->strip.begin();
   this->strip.setBrightness(brightness);
   this->strip.show();
-}*/
+}
+
+Lights::turnOn(uint8_t num_pixels, Color_t color){
+
+
+  uint32_t ColorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
+
+  for(int i = 0; i < num_pixels; i++){
+    strip.setPixelColor(i, ColorValue);
+    strip.show();
+  }
+}
+
+Lights::turnOnAll(Color_t color){
+
+  uint32_t ColorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
+
+  for(int i=0; i< this->num_pixels; i++){
+    strip.setPixelColor(i, ColorValue);
+    strip.show();
+  }
+}
+
+Lights::turnOff(){
+  strip.clear();
+}
+
 
 /*
 Lights::Lights(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness){
