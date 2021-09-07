@@ -3,6 +3,8 @@
 #include "libraries/LED_Strips/LED_Strips.h"
 
 
+//TODO: maybe do a chaseALL and chase methods where you choose how many led lights to turn on
+
 static RGB_t colors[NUM_COLORS] = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}, {255, 255, 0}, {255, 0, 255}, {0, 255, 255}, {255, 128, 0}, {255, 0, 128},
 {0, 128, 255}, {128, 64, 0} {0, 0, 0}};
 
@@ -24,13 +26,13 @@ void Lights::init(){
   this->strip.show();
 }
 
-void Lights::turnOn(uint8_t num_pixels, Color_t color){
+void Lights::turnOn(uint8_t num_leds, Color_t color){
 
 
   uint32_t ColorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
 
   for(int i = 0; i < this->num_pixels; i++){
-    if(i < num_pixels){
+    if(i < num_leds){
       strip.setPixelColor(i, ColorValue);
     }
 
@@ -59,15 +61,18 @@ void Lights::turnOff(){
 }
 
 
+//wait is in milliseconds
+ void Lights::chase(Color_t color, int wait, int cycles, LED_Direction_t direction){
 
- void Lights::chase(uint32_t color, int wait, int times, bool forward){
-  if (forward == true) {
-    for (int a = 0; a < times; a++) {
+   uint32_t colorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
+
+  if (direction == FORWARD) {
+    for (int a = 0; a < cycles; a++) {
       for (int b = 0; b < 3; b++) {
         this->strip.clear();
 
         for (int c = b; c < this->num_pixels; c += 3) {
-          this->strip.setPixelColor(c, color);
+          this->strip.setPixelColor(c, colorValue);
         }
         this->strip.show();
         delay(wait);
@@ -75,12 +80,12 @@ void Lights::turnOff(){
     }
   }
   else {
-    for (int a = times; a > 0; a--) {
+    for (int a = cycles; a > 0; a--) {
       for (int b = 3; b > 0; b--) {
         this->strip.clear();
 
-        for (int c = b; c < NUMPIXELS +1; c += 3) {
-          this->strip.setPixelColor(c-1, color);
+        for (int c = b; c < this->num_pixels; c += 3) {
+          this->strip.setPixelColor(c-1, colorValue);
         }
         this->strip.show();
         delay(wait);

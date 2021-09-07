@@ -39,6 +39,11 @@ typedef enum colors{
     OFF
 }Color_t;
 
+typedef enum direction{
+    FORWARD,
+    BACKWARDS
+}LED_Direction_t;
+
 
 class Lights{
     Adafruit_NeoPixel strip;
@@ -64,9 +69,11 @@ class Lights{
     void turnOn(uint8_t num_leds, Color_t color);
 
 
-    void turnOnAll(Color_t color);
+    void turnOn(Color_t color);
 
     void turnOff();
+
+    void chase(Color_t color, int wait, int cycles, LED_Direction_t direction);
 
    
    /*
