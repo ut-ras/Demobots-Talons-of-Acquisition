@@ -3,7 +3,7 @@
 #include "libraries/LED_Strips/LED_Strips.h"
 
 
-static Color_t colors[NUM_COLORS] = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}, {0, 0, 0}};
+static RGB_t colors[NUM_COLORS] = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}, {0, 0, 0}};
 
 
 
@@ -15,13 +15,15 @@ Lights::Lights(int num_pixels, int pin, int brightness){
   this->num_pixels = num_pixels;
   this->pin = pin;
   this->brightness = brightness;
+}
 
+void Lights::init(){
   this->strip.begin();
   this->strip.setBrightness(brightness);
   this->strip.show();
 }
 
-Lights::turnOn(uint8_t num_pixels, Color_t color){
+void Lights::turnOn(uint8_t num_pixels, Color_t color){
 
 
   uint32_t ColorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
@@ -32,7 +34,8 @@ Lights::turnOn(uint8_t num_pixels, Color_t color){
   }
 }
 
-Lights::turnOnAll(Color_t color){
+/*
+void Lights::turnOnAll(Color_t color){
 
   uint32_t ColorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
 
@@ -42,9 +45,9 @@ Lights::turnOnAll(Color_t color){
   }
 }
 
-Lights::turnOff(){
+void Lights::turnOff(){
   strip.clear();
-}
+}*/
 
 
 /*

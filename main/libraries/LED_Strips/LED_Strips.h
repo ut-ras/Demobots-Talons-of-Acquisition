@@ -17,13 +17,11 @@
 
 #define NUM_COLORS 5
 
-typedef struct Color{
-    uint32_t red,
-    uint32_t green,
-    uint32_t blue,
-}Color_t;
-
-static Color_t colors[NUM_COLORS] = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}, {0, 0, 0}};
+typedef struct RGBValues{
+    uint32_t red;
+    uint32_t green;
+    uint32_t blue;
+}RGB_t;
 
 
 typedef enum colors{
@@ -32,7 +30,7 @@ typedef enum colors{
     BLUE,
     WHITE,
     OFF
-}color_t;
+}Color_t;
 
 
 class Lights{
@@ -46,6 +44,8 @@ class Lights{
     /* Initialize a LED Strip */
     Lights(int num_pixels, int pin, int brightness);
 
+    void init();
+
     /** 
       * Turn on a specified number of initialized LEDs
       * 
@@ -54,12 +54,12 @@ class Lights{
       * 
       * Output: no output
       **/
-    turnOn(uint8_t num_leds, Color_t color);
+    void turnOn(uint8_t num_leds, Color_t color);
 
 
-    turnOnAll(Color_t color);
+    void turnOnAll(Color_t color);
 
-    turnOff();
+    void turnOff();
 
    
    /*
