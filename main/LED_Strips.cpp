@@ -28,10 +28,17 @@ void Lights::turnOn(uint8_t num_pixels, Color_t color){
 
   uint32_t ColorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
 
-  for(int i = 0; i < num_pixels; i++){
-    strip.setPixelColor(i, ColorValue);
-    strip.show();
+  for(int i = 0; i < this->num_pixels; i++){
+    if(i < num_pixels){
+      strip.setPixelColor(i, ColorValue);
+    }
+
+    else{
+      strip.setPixelColor(i, 0);
+    }
   }
+  strip.show();
+
 }
 
 /*
