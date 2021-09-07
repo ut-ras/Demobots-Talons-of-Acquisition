@@ -15,7 +15,7 @@
 #include <Arduino.h>
 #include <stdint.h>
 
-#define NUM_COLORS 5
+#define NUM_COLORS 12
 
 typedef struct RGBValues{
     uint32_t red;
@@ -29,6 +29,13 @@ typedef enum colors{
     GREEN,
     BLUE,
     WHITE,
+    PURPLE,
+    YELLOW,
+    CYAN,
+    ORANGE,
+    PINK,
+    LIGHT_BLUE,
+    BROWN,
     OFF
 }Color_t;
 
