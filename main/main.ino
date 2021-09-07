@@ -9,7 +9,7 @@ StepperControl myStepper;
 BigButton button;
 Sound music;*/
 
-Lights strip(10, 6, 10);
+Lights strip(40, 6, 10);
 
 
 void setup() {
@@ -19,5 +19,5 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  strip.turnOn(5, WHITE);
+  strip.chase(PINK, 200, 10, FORWARD);
 }

@@ -6,7 +6,7 @@
 //TODO: maybe do a chaseALL and chase methods where you choose how many led lights to turn on
 
 static RGB_t colors[NUM_COLORS] = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}, {255, 255, 0}, {255, 0, 255}, {0, 255, 255}, {255, 128, 0}, {255, 0, 128},
-{0, 128, 255}, {128, 64, 0} {0, 0, 0}};
+{0, 128, 255}, {128, 64, 0}, {0, 0, 0}};
 
 
 
@@ -45,7 +45,7 @@ void Lights::turnOn(uint8_t num_leds, Color_t color){
 }
 
 
-void Lights::turnOnAll(Color_t color){
+void Lights::turnOn(Color_t color){
 
   uint32_t ColorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
 
