@@ -51,6 +51,8 @@ class Lights{
     int pin;
     int brightness;
 
+    uint32_t Wheel(byte WheelPos);
+
     public:
 
     /* Initialize a LED Strip */
@@ -75,13 +77,6 @@ class Lights{
 
     void chase(Color_t color, int wait, int cycles, LED_Direction_t direction);
 
-   
-   /*
-    //Lights(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness);
-
-    //initializes the LED strip; call under setup
-    //void initializeStrip(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness);
-
     void colorWipe(uint32_t color, int wait, bool forward);
 
     void colorWipe2(uint32_t color, int wait, bool forward);
@@ -90,6 +85,13 @@ class Lights{
 
     //all leds are the same color and they cycle color every given seconds
     void rainbowCycle(uint8_t wait);
+
+    void solidRainbowChase(int wait);
+
+    void dynamicRainbowChase(uint8_t wait);
+
+
+   /*
 
     //need to implement alongside wheel function
     void dynamicRainbowChase(uint8_t wait);

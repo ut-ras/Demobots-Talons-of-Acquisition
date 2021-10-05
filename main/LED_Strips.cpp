@@ -93,15 +93,7 @@ void Lights::turnOff(){
     }
   }
 }
-/*
-void Lights::initializeStrip(Adafruit_NeoPixel strip, int num_pixels, int pin, int brightness){
-    this->strip = strip;
-    this->num_pixels = num_pixels;
-    this->pin = pin;
-    this->strip.begin();
-    this->strip.getBrightness(brightness);
-    this->strip.show();
-}
+
 
 void Lights::solidRainbowChase(int wait){
 
@@ -109,36 +101,11 @@ void Lights::solidRainbowChase(int wait){
 
     for (int i = 0; i < this->num_pixels; i++) {
       int pixelHue = firstPixelHue + (i * 65536L / this->num_pixels);
-      pixel.setPixelColor(i, this->strip.gamma32(this->strip.ColorHSV(pixelHue)));
+      this->strip.setPixelColor(i, this->strip.gamma32(this->strip.ColorHSV(pixelHue)));
     }
 
     this->strip.show();
     delay(wait);
-  }
-}
-
-void Lights::rainbowCycle(uint8_t wait){
-  uint16_t i, j;
-
-  for (j = 0; j < 256; j++) {
-    for (i = 0; i < this->num_pixels; i++) {
-      this->strip.setPixelColor(i, Wheel((i + j) & 255));
-    }
-    this->strip.show();
-    delay(wait);
-  }
-
-}
-
-void Lights::colorWipe3(uint32_t color, int wait){
-  
-  for(int i=0; i<this->num_pixels; i++){
-    this->strip.fill(color, i, 5);
-    this->strip.fill(color, NUMPIXELS-1-i, 5);
-
-    this->strip.show();
-    delay(wait);
-    this->strip.clear();
   }
 }
 
@@ -149,7 +116,8 @@ void Lights::colorWipe(uint32_t color, int wait, bool forward){
     for (int i = 0; i < this->num_pixels; i++) {
       this->strip.setPixelColor(i, color);        
       this->strip.show();                          
-      delay(wait);                           
+      delay(wait);    
+    }                       
   }
 
   else {
@@ -163,8 +131,7 @@ void Lights::colorWipe(uint32_t color, int wait, bool forward){
   this->strip.clear();
 }
 
-
-void Lights::colorWipe2((uint32_t color, int wait, bool forward){
+void Lights::colorWipe2(uint32_t color, int wait, bool forward){
     if (forward == true) {
 
     for (int i = 0; i < this->num_pixels; i++) { 
@@ -185,4 +152,56 @@ void Lights::colorWipe2((uint32_t color, int wait, bool forward){
   }
 
   this->strip.clear();
-}*/
+}
+
+void Lights::colorWipe3(uint32_t color, int wait){
+  
+  for(int i=0; i<this->num_pixels; i++){
+    this->strip.fill(color, i, 5);
+    this->strip.fill(color, this->num_pixels-1-i, 5);
+
+    this->strip.show();
+    delay(wait);
+    this->strip.clear();
+  }
+}
+
+//function that sets the color for dynamicRainbowChase, theaterRainbowChase and rainbowCycle
+uint32_t Lights::Wheel(byte WheelPos) {
+  WheelPos = 255 - WheelPos;
+  if (WheelPos < 85) {
+    return this->strip.Color(255 - WheelPos * 3, 0, WheelPos * 3);
+  }
+  if (WheelPos < 170) {
+    WheelPos -= 85;
+    return this->strip.Color(0, WheelPos * 3, 255 - WheelPos * 3);
+  }
+  WheelPos -= 170;
+  return this->strip.Color(WheelPos * 3, 255 - WheelPos * 3, 0);
+}
+
+
+//chase but looks smoother and slower than the solidRainbowChase
+void Lights::dynamicRainbowChase(uint8_t wait) {
+  uint16_t i, j;
+
+  for (j = 0; j < 256 * 5; j++) { // 5 cycles of all colors on wheel
+    for (i = 0; i < this->strip.numPixels(); i++) {
+      this->strip.setPixelColor(i, Wheel(((i * 256 / this->strip.numPixels()) + j) & 255));
+    }
+    this->strip.show();
+    delay(wait);
+  }
+}
+
+/*
+void Lights::rainbowCycle(uint8_t wait){
+  uint16_t i, j;
+
+  for (j = 0; j < 256; j++) {
+    for (i = 0; i < this->num_pixels; i++) {
+      this->strip.setPixelColor(i, Wheel((i + j) & 255));
+    }
+    this->strip.show();
+    delay(wait);
+  }*/
