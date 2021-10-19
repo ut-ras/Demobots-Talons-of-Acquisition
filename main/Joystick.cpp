@@ -31,19 +31,19 @@ Joystick::Joystick(int left, int right, int up, int down, int servoZ, int servoC
 }
 
 void Joystick::readInput(){
-	//dirX(digitalRead(rightInput)-digitalRead(leftInput));
-	//dirY(digitalRead(upInput)-digitalRead(downInput));
+	//dirX(digitalRead(rightInput)-digitalRead(leftInput)); //fix to the correct function names later
+	//dirY(digitalRead(upInput)-digitalRead(downInput)); 
   if (digitalRead(bigRedButton) == 1){
-    dropClaw(0);//put in the angle which it need to go to
+    //dropClaw();//put in the angle which it need to go to
   }
 }
 
 void Joystick::dropClaw(int angle){
-  //servo1.write(angle);
+  servo1.write(angle);
   //closeClaw();//put in the angle which it need to go to
   //servo1.write();//figure out how to reverse the movement
 }
 
 void Joystick::closeClaw(int angle){
-  //servo2.write(angle);//put in the angle which it need to go to
+  servo2.write(angle);
 }
