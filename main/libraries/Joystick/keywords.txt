@@ -1,0 +1,4 @@
+Joystick	KEYWORD1
+readInput	KEYWORD2
+dropClaw	KEYWORD2
+closeClaw	KEYWORD2
