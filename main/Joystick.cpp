@@ -1,45 +1,49 @@
-//include any libraries that need to be imported
 #include <Arduino.h>
 #include <Servo.h>
 
-//Compiles but not tested at all
+//Hello. Welcome to the spaghetti hidden in the can.
 
 #include "libraries/Joystick/Joystick.h"
 #include "libraries/StepperControl/StepperControl.h"
 
-int leftInput, rightInput, upInput, downInput, servoDown, servoClaw, bigRedButton;
-Servo servo1; //servo controlling up down motion
-Servo servo2; //servo controlling the opening and closing of the claw
 Joystick::Joystick(int left, int right, int up, int down, int servoZ, int servoClose, int buttonOne)
 {
-	leftInput = left;
-	rightInput = right;
-	upInput = up;
-	downInput = down;
-  servoDown = servoZ;
-  servoClaw = servoClose;
-  bigRedButton = buttonOne;
-	pinMode(leftInput, INPUT);
-	pinMode(rightInput, INPUT);
-	pinMode(upInput, INPUT);
-	pinMode(downInput, INPUT);
-  pinMode(servoZ, INPUT);
-  pinMode(servoClose, INPUT);
-  pinMode(bigRedButton, INPUT);
+	this->left = left;
+	this->right = right;
+	this->up = up;
+	this->down = down;
+  this->servoZ = servoZ;
+  this->servoClose = servoClose;
+  this->buttonOne = buttonOne;
+	pinMode(left, INPUT);
+	pinMode(right, INPUT);
+	pinMode(up, INPUT);
+	pinMode(down, INPUT);
+  pinMode(servoZ, OUTPUT);
+  pinMode(servoClose, OUTPUT);
+  pinMode(buttonOne, INPUT);
   servo1.attach(servoZ); //can add min and max values of the servo if feel like
   servo2.attach(servoClose);
+  pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void Joystick::readInput(){
 	//dirX(digitalRead(rightInput)-digitalRead(leftInput)); //fix to the correct function names later
 	//dirY(digitalRead(upInput)-digitalRead(downInput)); 
-  if (digitalRead(bigRedButton) == 1){
-    //dropClaw();//put in the angle which it need to go to
+  if (digitalRead(buttonOne) == HIGH){
+    this->dropClaw(120);//Note: the servo is continuous rotation
+  }
+  else{
+    this->dropClaw(60);
   }
 }
 
 void Joystick::dropClaw(int angle){
   servo1.write(angle);
+  digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
+  delay(1000);                       // wait for a second
+  digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW
+  delay(1000);  
   //closeClaw();//put in the angle which it need to go to
   //servo1.write();//figure out how to reverse the movement
 }
