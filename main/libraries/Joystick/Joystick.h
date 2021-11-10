@@ -13,6 +13,7 @@ class Joystick
   public:
 	Joystick(int left, int right, int up, int down, int servoZ, int servoClose, int buttonOne);
 	void readInput();
+	void init();
 	void dropClaw(int angle);
 	void closeClaw(int angle);
 	int left, right, up, down , servoZ, servoClose, buttonOne;

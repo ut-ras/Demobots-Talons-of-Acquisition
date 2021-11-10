@@ -2,6 +2,9 @@
 #include <Servo.h>
 
 //Hello. Welcome to the spaghetti hidden in the can.
+//Yellow - Signal
+//Red - Positive
+//Brown - Negative
 
 #include "libraries/Joystick/Joystick.h"
 #include "libraries/StepperControl/StepperControl.h"
@@ -15,10 +18,13 @@ Joystick::Joystick(int left, int right, int up, int down, int servoZ, int servoC
   this->servoZ = servoZ;
   this->servoClose = servoClose;
   this->buttonOne = buttonOne;
-	pinMode(left, INPUT);
-	pinMode(right, INPUT);
-	pinMode(up, INPUT);
-	pinMode(down, INPUT);
+}
+
+void Joystick::init(){
+  pinMode(left, INPUT);
+  pinMode(right, INPUT);
+  pinMode(up, INPUT);
+  pinMode(down, INPUT);
   pinMode(servoZ, OUTPUT);
   pinMode(servoClose, OUTPUT);
   pinMode(buttonOne, INPUT);
@@ -39,7 +45,7 @@ void Joystick::readInput(){
 }
 
 void Joystick::dropClaw(int angle){
-  servo1.write(angle);
+  this->servo1.write(angle);
   digitalWrite(LED_BUILTIN, HIGH);   // turn the LED on (HIGH is the voltage level)
   delay(1000);                       // wait for a second
   digitalWrite(LED_BUILTIN, LOW);    // turn the LED off by making the voltage LOW

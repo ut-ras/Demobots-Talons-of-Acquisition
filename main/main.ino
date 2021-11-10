@@ -8,6 +8,7 @@ Joystick myJoystick(0,1,2,4,9,5,6);
 void setup() {
   // put your setup code here, to run once:
   strip.init();
+  myJoystick.init();
 }
 
 void loop() {
