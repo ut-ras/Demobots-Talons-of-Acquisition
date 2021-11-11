@@ -9,6 +9,7 @@
 #include "libraries/Joystick/Joystick.h"
 #include "libraries/StepperControl/StepperControl.h"
 
+StepperControl myStepper;
 Joystick::Joystick(int left, int right, int up, int down, int servoZ, int servoClose, int buttonOne)
 {
 	this->left = left;
@@ -31,11 +32,12 @@ void Joystick::init(){
   servo1.attach(servoZ); //can add min and max values of the servo if feel like
   servo2.attach(servoClose);
   pinMode(LED_BUILTIN, OUTPUT);
+  myStepper.init();
 }
 
 void Joystick::readInput(){
-	//dirX(digitalRead(rightInput)-digitalRead(leftInput)); //fix to the correct function names later
-	//dirY(digitalRead(upInput)-digitalRead(downInput)); 
+	myStepper.stepX(digitalRead(right)-digitalRead(left)); //fix to the correct function names later
+	myStepper.stepZ(digitalRead(up)-digitalRead(down)); 
   if (digitalRead(buttonOne) == HIGH){
     this->dropClaw(120);//Note: the servo is continuous rotation
   }

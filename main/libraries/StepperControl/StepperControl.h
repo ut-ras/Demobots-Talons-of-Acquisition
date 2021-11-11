@@ -9,10 +9,10 @@
 class StepperControl
 {
   public:
-    StepperControl();
-    void stepX(int steps);
-    void stepZ(int steps);
+    	void stepX(int steps);
+    	void stepZ(int steps);
 	void returnOrigin();
+	void init();
 };
 
 #endif
