@@ -2,6 +2,7 @@
 #include "libraries/LED_Strips/LED_Strips.h"
 #include "libraries/LED_Strips/Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
 #include "libraries/StepperControl/StepperControl.h"
+#include "pins_RAMPS.h"
 
 
 #define joyNegX 49
