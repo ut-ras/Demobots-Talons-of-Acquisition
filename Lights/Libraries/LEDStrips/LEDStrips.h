@@ -45,7 +45,7 @@ typedef enum direction{
 }LED_Direction_t;
 
 
-class Lights{
+class LEDStrips{
 
     /* private fields*/
     Adafruit_NeoPixel strip;
@@ -74,7 +74,7 @@ class Lights{
      * @param brightness desired brightness of the LEDs
      *  
      **/
-    Lights(int numLEDs, int pin, int brightness);
+    LEDStrips(int numLEDs, int pin, int brightness);
 
     /**
      * @name init

@@ -1,9 +1,9 @@
-#include "libraries/LED_Strips/Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
+#include "libraries/LEDStrips/Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
 #include <Arduino.h>
-#include "libraries/LED_Strips/LED_Strips.h"
+#include "libraries/LEDStrips/LEDStrips.h"
 
 
-//TODO: maybe do a chaseALL and chase methods where you choose how many led lights to turn on
+//TODO: maybe do a chaseALL and chase methods where you choose how many led LEDStrips to turn on
 
 /** Values of available colors **/
 static RGB_t colors[NUM_COLORS] = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 255, 255}, {255, 255, 0}, {255, 0, 255}, {0, 255, 255}, {255, 128, 0}, {255, 0, 128},
@@ -11,7 +11,7 @@ static RGB_t colors[NUM_COLORS] = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 
 
 
 /**
- * @name Lights constructor
+ * @name LEDStrips constructor
  * 
  * @brief initializes strip with given parameters
  *
@@ -20,7 +20,7 @@ static RGB_t colors[NUM_COLORS] = {{255, 0, 0}, {0, 255, 0}, {0, 0, 255}, {255, 
  * @param brightness desired brightness of the LEDs
  *  
  **/
-Lights::Lights(int numLEDs, int pin, int brightness){
+LEDStrips::LEDStrips(int numLEDs, int pin, int brightness){
   
   Adafruit_NeoPixel newStrip = Adafruit_NeoPixel(numLEDs, pin,  NEO_GRB + NEO_KHZ800);
   
@@ -36,7 +36,7 @@ Lights::Lights(int numLEDs, int pin, int brightness){
  * 
  * @brief initilizes LED strip, call in setup() 
  **/
-void Lights::init(){
+void LEDStrips::init(){
   this->strip.begin();
   this->strip.setBrightness(brightness);
   this->strip.clear();
@@ -51,7 +51,7 @@ void Lights::init(){
  * @param numLEDs the number of initialized LEDs that will be turned on
  * @param color the desired color of the LEDs
  **/
-void Lights::turnOn(uint8_t numLEDs, Color_t color){
+void LEDStrips::turnOn(uint8_t numLEDs, Color_t color){
 
   uint32_t ColorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
 
@@ -75,7 +75,7 @@ void Lights::turnOn(uint8_t numLEDs, Color_t color){
  * 
  * @param color the desired color for the LEDs
  **/
-void Lights::turnOnAll(Color_t color){
+void LEDStrips::turnOnAll(Color_t color){
 
   uint32_t colorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
 
@@ -96,7 +96,7 @@ void Lights::turnOnAll(Color_t color){
  * @param LEDIndex index of the LED
  * 
  **/
-void Lights::turnOnLED(Color_t color, uint8_t LEDIndex){
+void LEDStrips::turnOnLED(Color_t color, uint8_t LEDIndex){
 
   uint32_t colorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
 
@@ -115,7 +115,7 @@ void Lights::turnOnLED(Color_t color, uint8_t LEDIndex){
  * @param LEDIndex index of the LED
  * 
  **/
-void Lights::turnOffLED(uint8_t LEDIndex){
+void LEDStrips::turnOffLED(uint8_t LEDIndex){
   
   uint32_t colorValue =  strip.Color(colors[OFF].red, colors[OFF].green, colors[OFF].blue);
   
@@ -129,7 +129,7 @@ void Lights::turnOffLED(uint8_t LEDIndex){
  * 
  * @brief Turn off all LEDs in strip
  **/
-void Lights::turnOff(){
+void LEDStrips::turnOff(){
   strip.clear();
   strip.show();
 }
@@ -146,7 +146,7 @@ void Lights::turnOff(){
  * @param cycles the number of desired cycles for this effect
  * @param direction desired direction of the LED movement
  **/
- void Lights::alternatingLightchase(Color_t color, int wait, int cycles, LED_Direction_t direction){
+ void LEDStrips::alternatingLightchase(Color_t color, int wait, int cycles, LED_Direction_t direction){
 
   /* get color value */
   uint32_t colorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
@@ -189,7 +189,7 @@ void Lights::turnOff(){
  * 
  * @param wait the delay/rate at which the lines gfof around the strip
  **/
-void Lights::solidRainbowChase(int wait){
+void LEDStrips::solidRainbowChase(int wait){
 
   for (long firstPixelHue = 0; firstPixelHue < 5 * 65536; firstPixelHue += 256) {
 
@@ -214,7 +214,7 @@ void Lights::solidRainbowChase(int wait){
  *                  either 'FORWARD' (from first LED to last LED) 
  *                  'BACKWARD' (from last LEd to first LED)
  **/
-void Lights::lightChase(uint32_t color, int wait, LED_Direction_t direction){
+void LEDStrips::lightChase(uint32_t color, int wait, LED_Direction_t direction){
 
   /* turn off all leds in strip */
   this->strip.clear();
@@ -256,7 +256,7 @@ void Lights::lightChase(uint32_t color, int wait, LED_Direction_t direction){
  *                  either 'FORWARD' (from first LED to last LED) 
  *                  'BACKWARD' (from last LEd to first LED)
  **/
-void Lights::lineChase(uint32_t color, int wait, LED_Direction_t direction){
+void LEDStrips::lineChase(uint32_t color, int wait, LED_Direction_t direction){
 
   /* turn off all leds in strip */
   this->strip.clear();
@@ -293,7 +293,7 @@ void Lights::lineChase(uint32_t color, int wait, LED_Direction_t direction){
  * @param color desired color
  * @param wait desired wait time/speed of the color lines 
  **/
-void Lights::splitChase(uint32_t color, int wait){
+void LEDStrips::splitChase(uint32_t color, int wait){
 
   /* turn off all leds in strip */
   this->strip.clear();
@@ -316,7 +316,7 @@ void Lights::splitChase(uint32_t color, int wait){
  *
  * @param WheelPos current wheel position
  **/
-uint32_t Lights::Wheel(byte WheelPos) {
+uint32_t LEDStrips::Wheel(byte WheelPos) {
   WheelPos = 255 - WheelPos;
   if (WheelPos < 85) {
     return this->strip.Color(255 - WheelPos * 3, 0, WheelPos * 3);
@@ -340,7 +340,7 @@ uint32_t Lights::Wheel(byte WheelPos) {
  * @note very similar to solidRainbowChase but the way the colors change is
  *       slightly different
  **/
-void Lights::dynamicRainbowChase(uint8_t wait) {
+void LEDStrips::dynamicRainbowChase(uint8_t wait) {
   uint16_t i, j;
 
   for (j = 0; j < 256 * 5; j++) { // 5 cycles of all colors on wheel
@@ -360,7 +360,7 @@ void Lights::dynamicRainbowChase(uint8_t wait) {
  * @param wait the delay/rate at which the strip will change colors
  * 
  **/
-void Lights::rainbowCycle(uint8_t wait){
+void LEDStrips::rainbowCycle(uint8_t wait){
   uint16_t i, j;
 
   for (j = 0; j < 256; j++) {
