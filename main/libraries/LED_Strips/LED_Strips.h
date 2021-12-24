@@ -41,66 +41,175 @@ typedef enum colors{
 
 typedef enum direction{
     FORWARD,
-    BACKWARDS
+    BACKWARD
 }LED_Direction_t;
 
 
 class Lights{
+
+    /* private fields*/
     Adafruit_NeoPixel strip;
     int num_pixels;
     int pin;
     int brightness;
 
+    /**
+     * @brief sets the color for dynamicRainbowChase, theaterRainbowChase and rainbowCycle
+     *
+     * @param WheelPos current wheel position
+     **/
     uint32_t Wheel(byte WheelPos);
 
     public:
 
-    /* Initialize a LED Strip */
-    Lights(int num_pixels, int pin, int brightness);
+    /** Available Methods **/
 
+    /**
+     * @name Lights constructor
+     * 
+     * @brief initializes strip with given parameters
+     *
+     * @param numLEDs number of LEDs from the strip to initialize
+     * @param pin the pin to where the LED strip will be connected to
+     * @param brightness desired brightness of the LEDs
+     *  
+     **/
+    Lights(int numLEDs, int pin, int brightness);
+
+    /**
+     * @name init
+     * 
+     * @brief initilizes LED strip, call in setup() 
+     **/
     void init();
 
     /** 
-      * Turn on a specified number of initialized LEDs
-      * 
-      * Inputs: 1) num_leds: the number of initialized pixels wished to be turned on
-      *         2) color: the desired color of the LEDs (available colors can be found in Color_t struct)
-      * 
-      * Output: no output
-      **/
-    void turnOn(uint8_t num_leds, Color_t color);
+     * @name turnOn
+     * 
+     * @brief Turn on a specified number of initialized LEDs
+     * 
+     * @param numLEDs the number of initialized LEDs that will be turned on
+     * @param color the desired color of the LEDs
+     **/
+    void turnOn(uint8_t numLEDs, Color_t color);
 
+    /**
+     * @name turnOnAll
+     * 
+     * @brief Turn on all initialized LEDs in strip 
+     * 
+     * @param color the desired color for the LEDs
+     **/
+    void turnOnAll(Color_t color);
 
-    void turnOn(Color_t color);
+    /**
+     * @name turnOnLED
+     * 
+     * @brief turn on a specified LED to a specified color
+     * 
+     * @param color desired color
+     * @param LEDIndex index of the LED
+     * 
+     **/
+    void turnOnLED(Color_t color, uint8_t LEDIndex);
 
+    /**
+     * @name turnOffLED
+     * 
+     * @brief turn off a specified LED to a specified color
+     * 
+     * @param color desired color
+     * @param LEDIndex index of the LED
+     * 
+     **/
+    void turnOffLED(uint8_t LEDIndex);
+
+    /**
+     * @name turnOFF
+     * 
+     * @brief Turn off all LEDs in strip
+     **/
     void turnOff();
 
-    void chase(Color_t color, int wait, int cycles, LED_Direction_t direction);
+    /**
+     * @name alternatingLightChase
+     * 
+     * @brief Turns on one LED followed by two OFF LEDs and again one repeated LED, then
+     *        creates movement of those LED pattern
+     * 
+     * @param color desired color
+     * @param wait desired interval/speed at which the LEDs will turn on and off
+     * @param cycles the number of desired cycles for this effect
+     * @param direction desired direction of the LED movement
+     **/
+    void alternatingLightchase(Color_t color, int wait, int cycles, LED_Direction_t direction);
 
-    void colorWipe(uint32_t color, int wait, bool forward);
+    /**
+     * @name lightChase 
+     * 
+     * @brief LEDs turn on in order in a given direction
+     * 
+     * @param color desired color
+     * @param wait desired interval/speed at which the LEDs will turn on
+     * @param direction desired direction for the LEDs to turn on,
+     *                  either 'FORWARD' (from first LED to last LED) 
+     *                  'BACKWARD' (from last LEd to first LED)
+     **/
+    void lightChase(uint32_t color, int wait, LED_Direction_t direction);
 
-    void colorWipe2(uint32_t color, int wait, bool forward);
+    /**
+     * @name lineChase
+     * 
+     * @brief One line of color moves around the strip ina given direction
+     * 
+     * @param color desired color
+     * @param wait desired delay/speed of the line of color
+     * @param direction desired direction of the line of color's movement,
+     *                  either 'FORWARD' (from first LED to last LED) 
+     *                  'BACKWARD' (from last LEd to first LED)
+     **/
+    void lineChase(uint32_t color, int wait,LED_Direction_t direction);
 
-    void colorWipe3(uint32_t color, int wait);
+    /**
+     * @name splitChase
+     * 
+     * @brief Two lines of color move around the strip alternating towards and from each other 
+     * 
+     * @param color desired color
+     * @param wait desired wait time/speed of the color lines 
+     **/
+    void splitChase(uint32_t color, int wait);
 
-    //all leds are the same color and they cycle color every given seconds
+    /**
+     * @name rainbowCycle
+     * 
+     * @brief The strip changes colors at a given rate into the colors of the rainbow
+     * 
+     * @param wait the delay/rate at which the strip will change colors
+     * 
+     **/
     void rainbowCycle(uint8_t wait);
 
+    /**
+     * @name solidRainbowChase
+     * 
+     * @brief Lines/bursts of the rainbow color go around the strip
+     * 
+     * @param wait the delay/rate at which the lines gfof around the strip
+     **/
     void solidRainbowChase(int wait);
 
+    /**
+     * @name dynamicRainbowChase
+     * 
+     * @brief Lines/bursts of the rainbow color go around the strip
+     * 
+     * @param wait the delay/rate at which the lines gfof around the strip
+     * 
+     * @note very similar to solidRainbowChase but the way the colors change is
+     *       slightly different
+     **/
     void dynamicRainbowChase(uint8_t wait);
-
-
-   /*
-
-    //need to implement alongside wheel function
-    void dynamicRainbowChase(uint8_t wait);
-
-    //LEDs alternate between on and off making it look like they are chasing somthing in a certain direction
-    void chase(uint32_t color, int wait, int times, bool forward);
-
-    //LEDs change color along the strip
-    void solidRainbowChase(int wait);*/
 };
 
 
