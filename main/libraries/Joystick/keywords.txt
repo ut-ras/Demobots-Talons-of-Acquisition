@@ -1,4 +1,4 @@
-Joystick	KEYWORD1
+Joystick	KEYWORD1	Joystick
 readInput	KEYWORD2
+init	KEYWORD2
 dropClaw	KEYWORD2
-closeClaw	KEYWORD2

@@ -18,7 +18,7 @@
 #define posYLim 23
 
 
-void StepperControl::init(){
+void StepperControl::init() {
   pinMode(xDirPin, OUTPUT);
   pinMode(xStepPin, OUTPUT);
   pinMode(yDirPin, OUTPUT);
@@ -29,8 +29,8 @@ void StepperControl::init(){
   pinMode(posYLim, INPUT);
 }
 
-void StepperControl::stepX(int steps){
-	if (steps < 0 && digitalRead(negXLim) == LOW){
+void StepperControl::stepX(int steps) {
+  if (steps < 0 && digitalRead(negXLim) == LOW) {
     // Set motor direction -x (counterclockwise spin)
     digitalWrite(xDirPin, LOW);
     //Spin Motor
@@ -38,7 +38,7 @@ void StepperControl::stepX(int steps){
     delayMicroseconds(2000);
     digitalWrite(xStepPin, LOW);
     delayMicroseconds(2000);
-	} else if (steps > 0 && digitalRead(posXLim) == LOW){
+  } else if (steps > 0 && digitalRead(posXLim) == LOW) {
     // Set motor direction +x (clockwise spin)
     digitalWrite(xDirPin, HIGH);
     //Spin Motor
@@ -46,10 +46,10 @@ void StepperControl::stepX(int steps){
     delayMicroseconds(2000);
     digitalWrite(xStepPin, LOW);
     delayMicroseconds(2000);
-	}
+  }
 }
-void StepperControl::stepZ(int steps){
-  if (steps > 0 && digitalRead(posYLim) == LOW){
+void StepperControl::stepZ(int steps) {
+  if (steps > 0 && digitalRead(posYLim) == LOW) {
     // Set motor direction +y (clockwise spin)
     digitalWrite(yDirPin, HIGH);
     //Spin Motor
@@ -57,7 +57,7 @@ void StepperControl::stepZ(int steps){
     delayMicroseconds(2000);
     digitalWrite(yStepPin, LOW);
     delayMicroseconds(2000);
-  } else if (steps < 0 && digitalRead(negYLim) == LOW){
+  } else if (steps < 0 && digitalRead(negYLim) == LOW) {
     // Set motor direction -y (counterclockwise spin)
     digitalWrite(yDirPin, LOW);
     //Spin Motor
@@ -67,11 +67,14 @@ void StepperControl::stepZ(int steps){
     delayMicroseconds(2000);
   }
 }
-void StepperControl::returnOrigin(){
-	while (digitalRead(negXLim) == LOW){
-		stepX(-1);
-	}
-	while (digitalRead(negYLim) == LOW){
-		stepZ(-1);
-	}
+void StepperControl::returnOrigin() {
+  while (digitalRead(negXLim) == LOW) {
+    stepX(-1);
+    if (digitalRead(negYLim) == LOW) {
+      stepZ(-1);
+    }
+  }
+  while (digitalRead(negYLim) == LOW) {
+    stepZ(-1);
+  }
 }

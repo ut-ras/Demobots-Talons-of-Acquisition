@@ -1,2 +1,0 @@
-Sound	KEYWORD1
-playSound	KEYWORD2

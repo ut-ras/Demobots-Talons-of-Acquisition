@@ -3,18 +3,12 @@
 #include "libraries/LED_Strips/Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
 #include "libraries/StepperControl/StepperControl.h"
 
-
-#define joyNegX 49
-#define joyPosX 47
-#define joyNegY 27
-#define joyPosY 25
-
 #define LED_PIN 6
 #define LED_COUNT 40
 #define LED_BRIGHTNESS 10
 
 Lights strip(LED_COUNT, LED_PIN, LED_BRIGHTNESS);
-Joystick myJoystick(joyNegX,joyPosX,joyPosY,joyNegY,9,5,6);
+Joystick myJoystick;
 
 void setup() {
   // put your setup code here, to run once:
@@ -27,9 +21,8 @@ void loop() {
   //myJoystick.readInput();
   strip.turnOnAll(RED);
   //delay(2000);
-  //strip.turnOnLED(RED,2);
+  //strip.turnOnLED(RED, 2);
   delay(2000);
   strip.turnOffLED(10);
   delay(2000);
-
 }

@@ -2,3 +2,4 @@ StepperControl	KEYWORD1
 stepX		KEYWORD2
 stepZ		KEYWORD2
 returnOrigin	KEYWORD2
+init		KEYWORD2
