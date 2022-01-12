@@ -23,7 +23,15 @@
 #define servoClose 5
 #define buttonOne 6
 
+#define sucPin 2 //only pine 2, 3, 18, 19, 20, 21 can be used for interrupts (pins 20 and 21 are unavailable while needed for I2C comm)
+
 StepperControl myStepper;
+extern bool resetWait;
+
+volatile bool success = false;
+void Joystick::shift(){
+  success = !success;  
+}
 
 void Joystick::init() {
   pinMode(left, INPUT);
@@ -36,6 +44,8 @@ void Joystick::init() {
   servo1.attach(servoZ, -90, 90);
   servo2.attach(servoClose, -90, 90);
   pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(sucPin, INPUT_PULLUP); // change to whatever it is
+  attachInterrupt(digitalPinToInterrupt(sucPin), shift, FALLING);
   myStepper.init();
 }
 
@@ -46,15 +56,17 @@ void Joystick::readInput() {
     dropClaw();
     myStepper.returnOrigin();
     servo2.write(servoTwoAngleReverse);
-    delay(500);                                     //possible addition of a start button to reset
+    delayMicroseconds(50000); //normal delay wouldnt work
+    if (success == true){
+      resetWait = true;
+    }
   }
 }
 
 void Joystick::dropClaw() {
   servo1.write(servoOneAngle);
-  delay(1000);
+  delay(500);
   servo2.write(servoTwoAngle);
   delay(500);
-  servo2.write(servoOneAngleReverse);
-  delay(1000);
+  servo1.write(servoOneAngleReverse);
 }

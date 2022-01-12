@@ -12,6 +12,7 @@ class Joystick
 	void readInput();
 	void init();
 	void dropClaw();
+	static void shift();
 	Servo servo1; //servo controlling up down motion
 	Servo servo2; //servo controlling the opening and closing of the claw
 };
