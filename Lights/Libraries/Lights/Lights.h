@@ -16,13 +16,13 @@
 
 void idle(LEDStrips strip);
 
-void inGame();
+void inGame(LEDStrips strip);
 
-void GameOver();
+void GameOver(LEDStrips strip);
 
-void Victory();
+void victory(LEDStrips strip);
 
-void Lost();
+void lost(LEDStrips strip);
 
 
 #endif
