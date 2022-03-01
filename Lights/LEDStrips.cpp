@@ -1,6 +1,6 @@
-#include "libraries/LEDStrips/Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
+#include "libraries/Lights/LEDStrips/Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
 #include <Arduino.h>
-#include "libraries/LEDStrips/LEDStrips.h"
+#include "libraries/Lights/LEDStrips/LEDStrips.h"
 
 
 //TODO: maybe do a chaseALL and chase methods where you choose how many led LEDStrips to turn on
@@ -117,7 +117,7 @@ void LEDStrips::turnOnLED(Color_t color, uint8_t LEDIndex){
  **/
 void LEDStrips::turnOffLED(uint8_t LEDIndex){
   
-  uint32_t colorValue =  strip.Color(colors[OFF].red, colors[OFF].green, colors[OFF].blue);
+  uint32_t colorValue =  strip.Color(colors[LEDSTRIPS_OFF].red, colors[LEDSTRIPS_OFF].green, colors[LEDSTRIPS_OFF].blue);
   
   strip.setPixelColor(LEDIndex, colorValue);
 
@@ -152,7 +152,7 @@ void LEDStrips::turnOff(){
   uint32_t colorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
 
   /* forward */
-  if (direction == FORWARD) {
+  if (direction == LEDSTRIPS_FORWARD) {
     for (int a = 0; a < cycles; a++) {
       for (int b = 0; b < 3; b++) {
         this->strip.clear();
@@ -223,7 +223,7 @@ void LEDStrips::lightChase(uint32_t color, int wait, LED_Direction_t direction){
   uint32_t colorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
 
   /* make chase go forward */
-  if (direction == FORWARD) {
+  if (direction == LEDSTRIPS_FORWARD) {
 
     for (int i = 0; i < this->num_pixels; i++) {
       this->strip.setPixelColor(i, colorValue);        
@@ -264,7 +264,7 @@ void LEDStrips::lineChase(uint32_t color, int wait, LED_Direction_t direction){
   /* Get the RGB color values for specified color */
   uint32_t colorValue = strip.Color(colors[color].red, colors[color].green, colors[color].blue);
 
-  if (direction == FORWARD) {
+  if (direction == LEDSTRIPS_FORWARD) {
 
     for (int i = 0; i < this->num_pixels; i++) { 
       this->strip.fill(colorValue, i, 5);

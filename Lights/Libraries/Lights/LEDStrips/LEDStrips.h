@@ -25,23 +25,23 @@ typedef struct RGBValues{
 
 
 typedef enum colors{
-    RED,
-    GREEN,
-    BLUE,
-    WHITE,
-    PURPLE,
-    YELLOW,
-    CYAN,
-    ORANGE,
-    PINK,
-    LIGHT_BLUE,
-    BROWN,
-    OFF
+    LEDSTRIPS_RED,
+    LEDSTRIPS_GREEN,
+    LEDSTRIPS_BLUE,
+    LEDSTRIPS_WHITE,
+    LEDSTRIPS_PURPLE,
+    LEDSTRIPS_YELLOW,
+    LEDSTRIPS_CYAN,
+    LEDSTRIPS_ORANGE,
+    LEDSTRIPS_PINK,
+    LEDSTRIPS_LIGHTBLUE,
+    LEDSTRIPS_BROWN,
+    LEDSTRIPS_OFF
 }Color_t;
 
 typedef enum direction{
-    FORWARD,
-    BACKWARD
+    LEDSTRIPS_FORWARD,
+    LEDSTRIPS_BACKWARD
 }LED_Direction_t;
 
 

@@ -1,5 +1,5 @@
-#include "libraries/LEDStrips/LEDStrips.h"
-#include "libraries/LEDStrips/Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
+#include "libraries/Lights/LEDStrips/LEDStrips.h"
+#include "libraries/Lights/LEDStrips/Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
 #include "libraries/Lights/Lights.h"
 
 #define LED_PIN 6

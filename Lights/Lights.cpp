@@ -1,13 +1,13 @@
 #include "Libraries/Lights/Lights.h"
-#include "Libraries/LEDStrips/LEDStrips.h"
+#include "Libraries/Lights/LEDStrips/LEDStrips.h"
 #include <Arduino.h>
 
 
-void turnOnOff(Color_t color, int times, int delay){
+void turnOnOff(LEDStrips strip, Color_t color, int times, int msDelay){
    
     for(int i=0; i<times; i++){
-        strip.turnOnAll(color);
-        delay(delay);
+        //strip.turnOnAll(color);
+        delay(msDelay);
         strip.turnOff();
     }
 
@@ -33,27 +33,26 @@ void inGame(LEDStrips strip){
 void victory(LEDStrips strip){
 
     /* turn lights on and off with green color */
-    turnOnOff(GREEN, 6, 300);
+    turnOnOff(strip, LEDSTRIPS_GREEN, 6, 300);
 
     for(int i=0; i<15; i++){
-        strip.lineChase(GREEN, 50, FORWARD);
+        strip.lineChase(LEDSTRIPS_GREEN, 50, LEDSTRIPS_FORWARD);
     }
 
-    for(int i=0; i<15){
-        strip.lineChase(GREEN, 15, BACKWARD);
+    for(int i=0; i<15; i++){
+        strip.lineChase(LEDSTRIPS_GREEN, 15, LEDSTRIPS_BACKWARD);
     }
 }
 
 void lost(LEDStrips strip){
 
-    turnOnOff(RED, 6, 300);
+    turnOnOff(strip, LEDSTRIPS_RED, 6, 300);
 
     for(int i=0; i<15; i++){
-        strip.lineChase(RED, 50, FORWARD);
+        strip.lineChase(LEDSTRIPS_RED, 50, LEDSTRIPS_FORWARD);
     }
 
-    for(int i=0; i<15){
-        strip.lineChase(RED, 15, BACKWARD);
+    for(int i=0; i<15; i++){
+        strip.lineChase(LEDSTRIPS_RED, 15, LEDSTRIPS_BACKWARD);
     }
 }
-

@@ -43,7 +43,7 @@
  *
  */
 
-#include "libraries/LEDStrips/Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
+#include "libraries/Lights/LEDStrips/Adafruit_NeoPixel-master/Adafruit_NeoPixel.h"
 
 #if defined(TARGET_LPC1768)
   #include <time.h>

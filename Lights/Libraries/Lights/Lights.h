@@ -10,7 +10,7 @@
 #ifndef Lights_H
 #define Lights_H
 
-#include "../LEDStrips/LEDStrips.h"
+#include "LEDStrips/LEDStrips.h"
 
 
 
