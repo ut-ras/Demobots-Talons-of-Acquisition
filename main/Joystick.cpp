@@ -22,13 +22,15 @@
 #define servoZ 9
 #define servoClose 5
 #define buttonOne 6
+#define buttonTwo 7
 
-#define sucPin 2 //only pine 2, 3, 18, 19, 20, 21 can be used for interrupts (pins 20 and 21 are unavailable while needed for I2C comm)
+#define sucPin 2 //only pins 2, 3, 18, 19, 20, 21 can be used for interrupts (pins 20 and 21 are unavailable while needed for I2C comm)
 
 StepperControl myStepper;
 extern bool resetWait;
 
 volatile bool success = false;
+
 void Joystick::shift(){
   success = !success;  
 }
