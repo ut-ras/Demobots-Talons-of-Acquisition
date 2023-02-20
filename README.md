@@ -16,4 +16,7 @@ TOA is an Demobots-made arcade-style skill crane/claw machine project based on R
  - Evan (Demobots)
 
 ## Previous Contributors
+- Dario Webmaster
 - Wenyu (Corporate)
+- Caitlin (RAS Alum)
+- Kendrick (RAS Alum
